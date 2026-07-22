@@ -1,0 +1,7 @@
+streamlit>=1.36
+pandas
+PyMySQL
+beautifulsoup4
+selenium
+requests
+lxml
