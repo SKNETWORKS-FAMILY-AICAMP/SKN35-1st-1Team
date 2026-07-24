@@ -1,0 +1,49 @@
+/* 최소한의 접근성 보강 CSS. Streamlit 기본 접근성(포커스, 시맨틱 요소)을 덮어쓰지 않는다. */
+
+/* 버튼: 큰 글씨 + 넓은 터치 영역 + 높은 명도 대비 */
+div.stButton > button, div.stLinkButton > a, div.stPageLink > a {
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 0.9rem 1.2rem;
+    min-height: 3.2rem;
+    border-width: 2px;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+/* 포커스 표시를 명확하게 유지(키보드 접근성) */
+div.stButton > button:focus-visible, div.stLinkButton > a:focus-visible {
+    outline: 3px solid #1a5fb4;
+    outline-offset: 2px;
+}
+
+/* 본문 캡션도 회색만으로 정보를 전달하지 않도록 최소 명도 보정 */
+[data-testid="stCaptionContainer"] {
+    color: #444444;
+}
+
+/* 메인 화면 앱 타일(아이콘 + 큰 버튼 + 짧은 설명) */
+.app-tile-icon {
+    font-size: 2.6rem;
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+}
+.app-tile-desc {
+    text-align: center;
+    font-size: 1rem;
+    color: #333333;
+    margin-top: 0.3rem;
+}
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: 16px;
+}
+
+/* KPI 카드(st.metric) 글씨를 조금 더 크게 */
+[data-testid="stMetricValue"] {
+    font-size: 1.7rem;
+}
+[data-testid="stMetricLabel"] {
+    font-size: 1rem;
+    font-weight: 600;
+}
