@@ -2,18 +2,15 @@
  * 스타일
  * ------------------------------------------------------------------ */
 
- /* 
- #002045
+/*
+#002045
+#D2E4FF
+#AAB9D2
+*/
 
- #D2E4FF
-
- #AAB9D2
- */
-
- html {
+html {
     font-size: 18px;
 }
-
 
 /**** 이용현황 ****/
 .st-key-panel_dark {
@@ -22,29 +19,26 @@
     padding: 1.6rem;
     border-radius: 12px;
 }
- 
+
 .st-key-panel_dark button {
     background-color: #fff !important;
     color: #003d9c;
     border: none;
-}
- 
-.info-box {
-    background-color: #F1F3F5;
-    border-radius: 10px;
-    padding: 1rem 1.2rem;
 }
 
 div[data-testid="stLayoutWrapper"]:has(> div.st-key-panel_dark) {
     height: 100% !important;
 }
 
-div[data-testid="stVerticalBlock"].st-key-info_box_1,
-div[data-testid="stVerticalBlock"].st-key-info_box_2 {
+div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] {
     background-color: #F1F3F5 !important;
+    color: #1B1B1B !important;
 }
- 
 
+div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] p,
+div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] span {
+    color: #1B1B1B !important;
+}
 
 /**** 예약하기 ****/
 div[data-testid="stVerticalBlock"].st-key-wait_status {
