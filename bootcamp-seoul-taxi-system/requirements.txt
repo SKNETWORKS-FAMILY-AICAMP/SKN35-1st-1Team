@@ -1,0 +1,17 @@
+# 데이터 수집
+requests
+beautifulsoup4
+lxml
+selenium
+webdriver-manager
+
+# 데이터 처리
+pandas
+
+# DB 연동
+pymysql
+python-dotenv
+
+# 조회 GUI
+streamlit
+plotly
