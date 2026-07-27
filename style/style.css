@@ -3,9 +3,9 @@
  * ------------------------------------------------------------------ */
 
 /*
-#002045
+#CBDD85
 #D2E4FF
-#AAB9D2
+#F8D6DE
 */
 
 html {
@@ -14,17 +14,17 @@ html {
 
 /**** 이용현황 ****/
 .st-key-panel_dark {
-    background-color: #002045 !important;
-    color: #fff !important;
+    background-color: #CBDD85 !important;
+    color: #3A4122 !important;
     padding: 1.6rem;
     border-radius: 12px;
 }
 
-.st-key-panel_dark button {
-    background-color: #fff !important;
-    color: #003d9c;
+/* .st-key-panel_dark button {
+    background-color: #3A4122 !important;
+    color: #fff;
     border: none;
-}
+} */
 
 div[data-testid="stLayoutWrapper"]:has(> div.st-key-panel_dark) {
     height: 100% !important;
@@ -41,10 +41,6 @@ div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] span {
 }
 
 /**** 예약하기 ****/
-div[data-testid="stVerticalBlock"].st-key-wait_status {
-    background-color: #F1F3F5 !important;
-    border-left: 4px solid #002045 !important;
-}
 
 
 /****  FAQ  ****/
