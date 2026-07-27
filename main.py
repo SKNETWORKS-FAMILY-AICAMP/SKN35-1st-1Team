@@ -21,7 +21,7 @@ from __future__ import annotations
 import streamlit as st
 from common import layout, styles
 from common.brand import PAGES
-from views import faq, home, news, placeholder, reserve
+from views import faq, home, news, placeholder, reserve, useStatus
 
 st.set_page_config(
     page_title="해치타GO (Haechi Ta-GO)",
@@ -36,6 +36,7 @@ RENDERERS = {
     "faq": faq.render,
     "news": news.render,
     "reserve": reserve.render,
+    "usage": useStatus.render,
 }
 
 def _handle_nav_query() -> None:
