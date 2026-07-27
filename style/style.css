@@ -1,0 +1,42 @@
+/* ==========================================================================
+   해치타GO — 공통 스타일
+   모든 페이지에서 로드된다. 페이지 전용 스타일은 style/<page>.css 로 분리한다.
+   ========================================================================== */
+
+:root {
+    --primary: #1a365d;
+    --primary-dark: #0f2440;
+    --accent: #2c5282;
+    --warm: #e07b39;
+}
+
+h1, h2, h3 { color: var(--primary-dark); }
+
+/* ---------- 사이드바 ---------- */
+section[data-testid="stSidebar"] { background:#f7f9fc; border-right:1px solid #e5e7eb; }
+
+.brand { display:flex; align-items:center; gap:12px; padding:8px 6px 4px;
+    border-radius:12px; }
+.brand, .brand *, .home-link { text-decoration:none !important; }
+.brand:hover { background:#eef2f8; }
+.brand img { width:42px; height:42px; }
+.brand-name { font-size:1.2rem; font-weight:900; color:var(--primary); line-height:1.15; }
+.brand-name span { font-size:0.72rem; font-weight:700; color:#8a94a3; }
+.brand-sub { font-size:0.76rem; color:#9aa4b2; margin-top:2px; }
+
+.home-link { display:inline-block; margin:6px 6px 2px; font-size:0.86rem; font-weight:700;
+    color:var(--accent); text-decoration:none; }
+.home-link:hover { text-decoration:underline; }
+
+.nav-cap { font-size:0.78rem; font-weight:700; letter-spacing:.04em; color:#8a94a3;
+    margin:14px 6px 6px; text-transform:uppercase; }
+
+[class*="st-key-nav_"] button { justify-content:flex-start !important; text-align:left;
+    font-size:1.05rem; font-weight:700; border-radius:12px; padding:12px 14px;
+    border:none; margin-bottom:2px; min-height:48px; }
+[class*="st-key-nav_"] button p { font-size:1.05rem; font-weight:700; }
+[class*="st-key-nav_"] button[kind="secondary"] { background:transparent; color:#374151; }
+[class*="st-key-nav_"] button[kind="secondary"]:hover { background:#e8edf3; color:var(--primary); }
+[class*="st-key-nav_"] button[kind="primary"] { background:var(--primary); color:#fff;
+    box-shadow:0 2px 8px rgba(26,54,93,0.25); }
+[class*="st-key-nav_"] button[kind="primary"] p { color:#fff; }
