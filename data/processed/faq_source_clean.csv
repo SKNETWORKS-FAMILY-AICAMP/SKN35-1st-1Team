@@ -1,0 +1,9 @@
+﻿source_id,source_code,source_name,source_url,collect_method
+1,board_faq,서울시설공단 장애인콜택시 자주하는질문 게시판,https://www.sisul.or.kr/open_content/calltaxi/bbs/bbsMsgDetail.do?bcd=faq&cate1=calltaxi&msg_seq=288,BeautifulSoup
+2,join,서울시설공단 장애인콜택시 가입안내,https://www.sisul.or.kr/open_content/calltaxi/introduce/join.jsp,BeautifulSoup
+3,receipt,서울시설공단 장애인콜택시 이용기준,https://www.sisul.or.kr/open_content/calltaxi/introduce/receipt.jsp,BeautifulSoup
+4,guide_internet,서울시설공단 장애인콜택시 이용방법 - 인터넷접수,https://www.sisul.or.kr/open_content/calltaxi/introduce/guide.jsp,BeautifulSoup
+5,guide_sms,서울시설공단 장애인콜택시 이용방법 - 문자접수,https://www.sisul.or.kr/open_content/calltaxi/introduce/guide4.jsp,BeautifulSoup
+6,allday,서울시설공단 장애인콜택시 전일접수제 이용안내,https://www.sisul.or.kr/open_content/calltaxi/introduce/allday.jsp,BeautifulSoup
+7,obey,서울시설공단 장애인콜택시 이용자 준수사항,https://www.sisul.or.kr/open_content/calltaxi/introduce/obey.jsp,BeautifulSoup
+8,guide_app,서울시설공단 장애인콜택시 이용방법 - 앱접수,https://www.sisul.or.kr/open_content/calltaxi/introduce/guide5.jsp,BeautifulSoup

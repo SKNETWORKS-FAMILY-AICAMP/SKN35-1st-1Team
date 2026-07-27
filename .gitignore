@@ -1,0 +1,11 @@
+# 실제 접속 정보 — 절대 커밋 금지
+.env
+
+# 템플릿은 팀원이 복사해 써야 하므로 추적한다
+# (저장소 루트 .gitignore의 `.env.*` 규칙을 여기서 되돌린다)
+!.env.example
+
+__pycache__/
+*.pyc
+*.log
+.streamlit/secrets.toml
