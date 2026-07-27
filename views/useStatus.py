@@ -13,7 +13,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 # db 스크립트 import
-from db.db import get_year_count, get_month_count, get_hour_count
+from db.db import get_year_count, get_month_count, get_hour_count, get_district_summary
 
 GEOJSON_PATH = "data/seoul_gu_boundary.json"
 
@@ -60,14 +60,6 @@ def build_map(selected_gu=None):
     ).add_to(m)
 
     return m
-
-def get_dummy_district_stats(gu_name):
-    random.seed(hash(gu_name) % 1000)
-    return {
-        "usage_count": random.randint(300, 1500),
-        "avg_wait": round(random.uniform(8, 25), 1),
-        "avg_price": random.randint(1700, 50000)
-    }
 
 
 """연도별 시간대 통계 데이터 """
@@ -136,13 +128,78 @@ def show_useStatus():
                     st.rerun()
 
     # ---------------- 우측 정보 패널 ----------------
+    # with col_panel:
+    #     gu = st.session_state.selected_gu
+    #     if gu:
+    #         stats = get_district_summary(gu)
+    #         usage_val = f"{stats['usage_count']:,} 건"
+    #         wait_val = f"{stats['avg_wait']} 분"
+    #         price_val = f"{stats['avg_price']:,} 원"
+    #     else:
+    #         usage_val = "- 건"
+    #         wait_val = "- 분"
+    #         price_val = "- 원"
+
+    #     with st.container(key="panel_dark"):
+    #         st.markdown(
+    #             f"""
+    #             <h4 style="font-size:1.4rem">📍 {gu if gu else '지역을 선택하세요'}</h4>
+    #             <hr style="margin: 1rem 0 2rem;background: #789b37;">
+    #             현재 이용 건수<br>
+    #             <span style="font-size:3rem; font-weight:700;">{usage_val}</span><br><br><br>
+    #             평균 대기 시간<br>
+    #             <span style="font-size:3rem; font-weight:700;">{wait_val}</span><br><br><br>
+    #             평균 이용 요금<br>
+    #             <span style="font-size:3rem; font-weight:700;">{price_val}</span>
+    #             """,
+    #             unsafe_allow_html=True,
+    #         )
+    #         st.write("")
+
+    #         # 선택한 "구"가 어딘지 값을 session_state에 저장
+    #         def _go_to_reserve():
+    #             st.session_state.page = "reserve"
+    #             st.session_state.prefill_depart = gu
+
+    #         # 해당 버튼 클릭 시 "예약하기"페이지로 이동
+    #         st.button(
+    #             "이 구역 예약하기",
+    #             use_container_width=True,
+    #             type="primary",
+    #             disabled=(gu is None),
+    #             on_click=_go_to_reserve,  # session_state에 저장한 내가 선택한 "구" 값을 가지고 이동
+    #         )
+
+    # st.write("")
     with col_panel:
         gu = st.session_state.selected_gu
         if gu:
-            stats = get_dummy_district_stats(gu)
-            usage_val = f"{stats['usage_count']:,} 건"
-            wait_val = f"{stats['avg_wait']} 분"
-            price_val = f"{stats['avg_price']:,} 원"
+            stats = get_district_summary(gu)
+
+            if stats:
+                daily_avg_count = stats["daily_avg_count"]
+                avg_wait_minutes = stats["avg_wait_minutes"]
+                avg_fare = stats["avg_fare"]
+
+                usage_val = (
+                    f"{daily_avg_count:,.1f} 건"
+                    if daily_avg_count is not None
+                    else "- 건"
+                )
+                wait_val = (
+                    f"{avg_wait_minutes:,.1f} 분"
+                    if avg_wait_minutes is not None
+                    else "- 분"
+                )
+                price_val = (
+                    f"{avg_fare:,.0f} 원"
+                    if avg_fare is not None
+                    else "- 원"
+                )
+            else:
+                usage_val = "- 건"
+                wait_val = "- 분"
+                price_val = "- 원"
         else:
             usage_val = "- 건"
             wait_val = "- 분"
@@ -153,9 +210,9 @@ def show_useStatus():
                 f"""
                 <h4 style="font-size:1.4rem">📍 {gu if gu else '지역을 선택하세요'}</h4>
                 <hr style="margin: 1rem 0 2rem;background: #789b37;">
-                현재 이용 건수<br>
+                일평균 이용 건수<br>
                 <span style="font-size:3rem; font-weight:700;">{usage_val}</span><br><br><br>
-                평균 대기 시간<br>
+                평균 배차 대기시간<br>
                 <span style="font-size:3rem; font-weight:700;">{wait_val}</span><br><br><br>
                 평균 이용 요금<br>
                 <span style="font-size:3rem; font-weight:700;">{price_val}</span>
