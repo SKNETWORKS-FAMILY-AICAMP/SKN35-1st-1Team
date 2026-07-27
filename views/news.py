@@ -89,7 +89,7 @@ def render() -> None:
     """관련뉴스 화면을 그린다."""
     styles.load("news.css")
 
-    st.header("📰 관련뉴스")
+    st.title("관련뉴스")
     st.caption("장애인콜택시와 관련된 최신 소식과 정책 변화, 이용 안내 정보를 한눈에 확인하세요.")
 
     keyword = st.text_input("검색", placeholder="뉴스 제목이나 키워드를 검색하세요",
@@ -99,5 +99,3 @@ def render() -> None:
     for tab, (_, cat) in zip(tabs, TABS):
         with tab:
             _grid(cat, keyword)
-
-    st.caption("※ 표시된 소식은 UI 예시(Dummy) 콘텐츠입니다.")
