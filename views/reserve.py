@@ -1,18 +1,13 @@
 """
 예약하기 페이지 (reserve.py)
 """
-
 import datetime
-
 import streamlit as st
-
 from db.db import get_weekday_hour_stats
-
 
 # ---------------------------------------------------------
 # DB 데이터 조회
 # ---------------------------------------------------------
-
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_weekday_hour_stats(weekday_no):
     """
@@ -23,7 +18,6 @@ def load_weekday_hour_stats(weekday_no):
     """
 
     return get_weekday_hour_stats(weekday_no)
-
 
 def get_congestion_message(selected_date, selected_time):
     """
@@ -153,7 +147,6 @@ def get_congestion_message(selected_date, selected_time):
 
     return level, message, recommended_hours
 
-
 def show_congestion_message(level, message):
     """혼잡도에 맞는 색상의 안내 상자를 표시합니다."""
 
@@ -165,7 +158,6 @@ def show_congestion_message(level, message):
 
     else:
         st.info(message)
-
 
 def show_recommended_hours(recommended_hours):
     """DB 분석 결과를 바탕으로 추천 시간대를 표시합니다."""
@@ -199,11 +191,9 @@ def show_recommended_hours(recommended_hours):
     for text in recommendation_texts:
         st.markdown(f"- {text}")
 
-
 # ---------------------------------------------------------
 # 입력폼 검증
 # ---------------------------------------------------------
-
 def validate_form(data):
     """필수 입력값과 연락처를 검사합니다."""
 
@@ -239,11 +229,9 @@ def validate_form(data):
 
     return errors
 
-
 # ---------------------------------------------------------
 # 예약정보 요약
 # ---------------------------------------------------------
-
 def generate_summary(data):
     """전화 및 문자 접수에 사용할 요약문을 생성합니다."""
 
@@ -267,8 +255,7 @@ def generate_summary(data):
 # ---------------------------------------------------------
 # 예약하기 페이지
 # ---------------------------------------------------------
-
-def show_reserve():
+def render():
     st.title("예약하기")
 
     st.markdown(
@@ -436,11 +423,10 @@ def show_reserve():
                     use_container_width=True,
                 )
 
-
 if __name__ == "__main__":
     st.set_page_config(
         page_title="예약하기 - 우리동네 장애인콜택시",
         layout="wide",
     )
 
-    show_reserve()
+    render()

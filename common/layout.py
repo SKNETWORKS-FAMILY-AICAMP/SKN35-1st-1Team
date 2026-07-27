@@ -6,12 +6,9 @@
 """
 
 from __future__ import annotations
-
 import streamlit as st
-
 from common.assets import FACE_URI
 from common.brand import BRAND_EN, BRAND_KO, NAV_ORDER, PAGES, TAGLINE
-
 
 def render_sidebar() -> None:
     """브랜드 헤더 + 메뉴 버튼 + 안내 문구를 사이드바에 그린다."""

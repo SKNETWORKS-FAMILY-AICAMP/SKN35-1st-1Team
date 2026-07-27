@@ -22,10 +22,10 @@ def get_db_connection():
 
     return pymysql.connect(
         host=os.getenv("DB_HOST"),
-        port=int(os.getenv("DB_PORT", "4000")),
+        port=int(os.getenv("DB_PORT")),
         user=os.getenv("DB_USERNAME"),
         password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_DATABASE", "seoul_calltaxi"),
+        database=os.getenv("DB_DATABASE"),
         charset="utf8mb4",
         cursorclass=DictCursor,
         ssl={

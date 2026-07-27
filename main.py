@@ -18,12 +18,10 @@
 """
 
 from __future__ import annotations
-
 import streamlit as st
-
 from common import layout, styles
 from common.brand import PAGES
-from views import faq, home, news, placeholder
+from views import faq, home, news, placeholder, reserve
 
 st.set_page_config(
     page_title="해치타GO (Haechi Ta-GO)",
@@ -33,11 +31,12 @@ st.set_page_config(
 )
 
 # 페이지 key → 렌더 함수. 여기에 없는 key는 placeholder로 처리된다.
+# 메뉴 구현 렌더링 부분 **
 RENDERERS = {
     "faq": faq.render,
     "news": news.render,
+    "reserve": reserve.render,
 }
-
 
 def _handle_nav_query() -> None:
     """홈 카드/브랜드의 링크(?nav=...) 클릭을 처리한다."""
@@ -48,7 +47,6 @@ def _handle_nav_query() -> None:
             st.session_state.menu = target
         st.query_params.clear()
         st.rerun()
-
 
 def main() -> None:
     if "menu" not in st.session_state:
@@ -70,7 +68,6 @@ def main() -> None:
         render()
     else:
         placeholder.render(PAGES[menu])
-
 
 if __name__ == "__main__":
     main()
