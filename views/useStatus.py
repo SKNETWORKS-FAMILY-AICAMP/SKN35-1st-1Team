@@ -12,8 +12,10 @@ import folium                   # 지도
 import streamlit as st
 from streamlit_folium import st_folium
 
+
 # db 스크립트 import
 from db.db import get_year_count, get_month_count, get_hour_count, get_district_summary
+from common import styles
 
 GEOJSON_PATH = "data/seoul_gu_boundary.json"
 
@@ -68,8 +70,8 @@ def get_hourly_stats_by_year():
     result = get_hour_count()
 
     return [
-        {"hour": hr, "year": str(yr), "count": count}
-        for yr, hr, count in result
+        {"hour": int(row["hr"]), "year": str(row["yr"]), "count": row["trip_count"]}
+        for row in result
     ]
 
 
@@ -79,8 +81,9 @@ def get_yearly_total():
     result = get_year_count()
     # result 예시: [(2025, 1729476), (2024, 1695539), (2023, 1772364)]
 
-    years = [str(row[0]) for row in result]
-    counts = [row[1] for row in result]
+    years = [str(row["source_year"]) for row in result]
+    counts = [row["trip_count"] for row in result]
+
 
     df = pd.DataFrame({"연도": years, "건수": counts})
     df = df.sort_values("연도").reset_index(drop=True)  # 2023, 2024, 2025 순서로 정렬
@@ -94,9 +97,9 @@ def get_monthly_by_year():
     result = get_month_count()  # datetime
 
     rows = [
-        {"월": f"{mo}월", "연도": str(yr), "건수": count}
-        for yr, mo, count in result
-        if yr is not None and mo is not None
+        {"월": f"{row['mo']}월", "연도": str(row['yr']), "건수": row['trip_count']}
+        for row in result
+        if row['yr'] is not None and row['mo'] is not None
     ]
 
     return pd.DataFrame(rows)
@@ -104,7 +107,9 @@ def get_monthly_by_year():
 # ------------------------------------------------------------------
 # 메인 페이지
 # ------------------------------------------------------------------
-def show_useStatus():
+def render():
+    styles.load("useStatus.css")
+
     if "selected_gu" not in st.session_state:
         st.session_state.selected_gu = None
 
@@ -128,49 +133,6 @@ def show_useStatus():
                     st.rerun()
 
     # ---------------- 우측 정보 패널 ----------------
-    # with col_panel:
-    #     gu = st.session_state.selected_gu
-    #     if gu:
-    #         stats = get_district_summary(gu)
-    #         usage_val = f"{stats['usage_count']:,} 건"
-    #         wait_val = f"{stats['avg_wait']} 분"
-    #         price_val = f"{stats['avg_price']:,} 원"
-    #     else:
-    #         usage_val = "- 건"
-    #         wait_val = "- 분"
-    #         price_val = "- 원"
-
-    #     with st.container(key="panel_dark"):
-    #         st.markdown(
-    #             f"""
-    #             <h4 style="font-size:1.4rem">📍 {gu if gu else '지역을 선택하세요'}</h4>
-    #             <hr style="margin: 1rem 0 2rem;background: #789b37;">
-    #             현재 이용 건수<br>
-    #             <span style="font-size:3rem; font-weight:700;">{usage_val}</span><br><br><br>
-    #             평균 대기 시간<br>
-    #             <span style="font-size:3rem; font-weight:700;">{wait_val}</span><br><br><br>
-    #             평균 이용 요금<br>
-    #             <span style="font-size:3rem; font-weight:700;">{price_val}</span>
-    #             """,
-    #             unsafe_allow_html=True,
-    #         )
-    #         st.write("")
-
-    #         # 선택한 "구"가 어딘지 값을 session_state에 저장
-    #         def _go_to_reserve():
-    #             st.session_state.page = "reserve"
-    #             st.session_state.prefill_depart = gu
-
-    #         # 해당 버튼 클릭 시 "예약하기"페이지로 이동
-    #         st.button(
-    #             "이 구역 예약하기",
-    #             use_container_width=True,
-    #             type="primary",
-    #             disabled=(gu is None),
-    #             on_click=_go_to_reserve,  # session_state에 저장한 내가 선택한 "구" 값을 가지고 이동
-    #         )
-
-    # st.write("")
     with col_panel:
         gu = st.session_state.selected_gu
         if gu:
@@ -223,7 +185,7 @@ def show_useStatus():
 
             # 선택한 "구"가 어딘지 값을 session_state에 저장
             def _go_to_reserve():
-                st.session_state.page = "reserve"
+                st.session_state.menu = "reserve"
                 st.session_state.prefill_depart = gu
 
             # 해당 버튼 클릭 시 "예약하기"페이지로 이동
@@ -338,4 +300,4 @@ def show_useStatus():
 
 if __name__ == "__main__":
     st.set_page_config(page_title="이용현황 - 우리동네 장애인콜택시", layout="wide")
-    show_useStatus()
+    render()

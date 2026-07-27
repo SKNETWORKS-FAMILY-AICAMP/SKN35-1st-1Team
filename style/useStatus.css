@@ -1,0 +1,25 @@
+/* ==========================================================================
+   이용현황
+   ========================================================================== */
+
+   
+.st-key-panel_dark {
+    background-color: #CBDD85 !important;
+    color: #3A4122 !important;
+    padding: 1.6rem;
+    border-radius: 12px;
+}
+
+div[data-testid="stLayoutWrapper"]:has(> div.st-key-panel_dark) {
+    height: 100% !important;
+}
+
+div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] {
+    background-color: #F1F3F5 !important;
+    color: #1B1B1B !important;
+}
+
+div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] p,
+div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] span {
+    color: #1B1B1B !important;
+}
