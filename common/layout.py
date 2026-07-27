@@ -15,23 +15,23 @@ def render_sidebar() -> None:
     with st.sidebar:
         st.markdown(
             f"""
-            <a class="brand" href="?nav=home" target="_self" title="홈으로">
+            <a class="brand" href="?nav=home" target="_self" title="홈으로" style="margin-bottom: 3rem;">
                 <img src="{FACE_URI}" alt="해치"/>
                 <div>
                     <div class="brand-name">{BRAND_KO} <span>{BRAND_EN}</span></div>
                     <div class="brand-sub">{TAGLINE}</div>
                 </div>
             </a>
-            <a class="home-link" href="?nav=home" target="_self">← 홈으로</a>
             """,
             unsafe_allow_html=True,
         )
-        st.markdown('<div class="nav-cap">메뉴</div>', unsafe_allow_html=True)
+        # st.markdown('<div class="nav-cap">메뉴</div>', unsafe_allow_html=True)
 
         for key in NAV_ORDER:
             page = PAGES[key]
             active = st.session_state.menu == key
-            if st.button(f"{page['icon']}  {page['label']}", key=f"nav_{key}",
+            # if st.button(f"{page['icon']}  {page['label']}", key=f"nav_{key}",
+            if st.button(f"{page['label']}", key=f"nav_{key}",
                          use_container_width=True,
                          type="primary" if active else "secondary"):
                 st.session_state.menu = key
