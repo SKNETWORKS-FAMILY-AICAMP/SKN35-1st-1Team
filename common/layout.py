@@ -37,6 +37,3 @@ def render_sidebar() -> None:
                 st.session_state.menu = key
                 st.rerun()
 
-        st.divider()
-        st.caption("📞 이용문의 1588-4388 · 24시간")
-        st.caption("⚠ 표시 데이터는 예시(Dummy)입니다.")
