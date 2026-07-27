@@ -12,7 +12,8 @@ import folium                   # 지도
 import streamlit as st
 from streamlit_folium import st_folium
 
-from db.db import get_year_count             # db 스크립트 import
+# db 스크립트 import
+from db.db import get_year_count, get_month_count, get_hour_count
 
 GEOJSON_PATH = "data/seoul_gu_boundary.json"
 
@@ -69,49 +70,42 @@ def get_dummy_district_stats(gu_name):
     }
 
 
-"""연도별 시간대 통계 더미 데이터. TODO: 실제 3개년 탑승내역 기반 함수로 교체"""
-def get_dummy_hourly_stats_by_year():
-    result = []
-    for year in [2023, 2024, 2025]:
-        random.seed(year)  # 연도마다 다른 패턴이 나오게
-        hour_counter = Counter()
-        weights = [1] * 6 + [8, 10, 6, 3, 3, 3, 3, 3, 3, 3, 3] + [9, 10, 5] + [2] * 4
+"""연도별 시간대 통계 데이터 """
+@st.cache_data
+def get_hourly_stats_by_year():
+    result = get_hour_count()
 
-        for _ in range(4000 + (year - 2023) * 500):  # 연도별로 총량도 살짝 다르게
-            hour = random.choices(range(24), weights=weights)[0]
-            hour_counter[hour] += 1
-
-        for h in range(24):
-            result.append({"hour": h, "year": str(year), "count": hour_counter.get(h, 0)})
-    return result
+    return [
+        {"hour": hr, "year": str(yr), "count": count}
+        for yr, hr, count in result
+    ]
 
 
-"""연도별 총 이용건수 더미. TODO: 실제 탑승내역 집계로 교체"""
-def get_dummy_yearly_totals():
+"""연도별 총 이용건수"""
+@st.cache_data
+def get_yearly_total():
     result = get_year_count()
+    # result 예시: [(2025, 1729476), (2024, 1695539), (2023, 1772364)]
 
-    print(result)
-    # print('asdf')
+    years = [str(row[0]) for row in result]
+    counts = [row[1] for row in result]
 
-    return pd.DataFrame({
-        "연도": ["2023", "2024", "2025"],
-        "건수": [42000, 46500, 51200],
-    })
+    df = pd.DataFrame({"연도": years, "건수": counts})
+    df = df.sort_values("연도").reset_index(drop=True)  # 2023, 2024, 2025 순서로 정렬
+
+    return df
 
 
+"""월별 x 연도별 이용건수"""
+@st.cache_data
+def get_monthly_by_year():
+    result = get_month_count()  # datetime
 
-"""월별 x 연도별 이용건수 더미. TODO: 실제 탑승내역 집계로 교체"""
-def get_dummy_monthly_by_year():
-    rows = []
-    for year in [2023, 2024, 2025]:
-        random.seed(year)
-        base = 3000 + (year - 2023) * 300
-        for month in range(1, 13):
-            rows.append({
-                "월": f"{month}월",
-                "연도": str(year),
-                "건수": base + random.randint(-500, 800),
-            })
+    rows = [
+        {"월": f"{mo}월", "연도": str(yr), "건수": count}
+        for yr, mo, count in result
+        if yr is not None and mo is not None
+    ]
 
     return pd.DataFrame(rows)
 
@@ -131,7 +125,7 @@ def show_useStatus():
     # ---------- 지도 카드 (기본 container) ----------
     with col_map:
         with st.container(border=True):
-            st.subheader("**자치구별 현황 지도**")
+            st.markdown("**자치구별 현황 지도**")
             m = build_map(selected_gu=st.session_state.selected_gu)
             map_data = st_folium(m, width=None, height=580, key="seoul_map")
 
@@ -190,8 +184,8 @@ def show_useStatus():
     with st.container(border=True):
         left, right = st.columns([3, 1])
         with left:
-            st.subheader("**시간대별 예약 빈도**")
-            st.markdown("출퇴근 시간대(08:00 - 10:00)에 수요가 가장 집중됩니다.")
+            st.markdown("**시간대별 예약 빈도**")
+            # st.markdown("출퇴근 시간대(08:00 - 10:00)에 수요가 가장 집중됩니다.")
         with right:
             st.markdown(
                 '<span style="color:#F8D6DE;font-weight:700;">● 2023</span> &nbsp; '
@@ -200,21 +194,26 @@ def show_useStatus():
                 unsafe_allow_html=True,
             )
 
-        # TODO: 실제 3개년 탑승내역 기반 함수로 교체
-        hourly_data = get_dummy_hourly_stats_by_year()  
+        hourly_data = get_hourly_stats_by_year()
+        hourly_data = [d for d in hourly_data if 7 <= d["hour"] <= 21]
 
         chart = (
             alt.Chart(alt.Data(values=hourly_data))
-            .mark_area(opacity=0.55, line={"strokeWidth": 2})
+            # .mark_area(opacity=0.55, line={"strokeWidth": 2})
+            .mark_line(strokeWidth=3, point={"size": 80})
             .encode(
-                x=alt.X("hour:O", title=None, axis=alt.Axis(labelAngle=0)),
-                y=alt.Y("count:Q", title="예약 건수"),
+                x=alt.X(
+                    "hour:O",
+                    title=None,
+                    axis=alt.Axis(labelAngle=0, labelExpr="datum.label + '시'"),
+                ),
+                y=alt.Y("count:Q", title=None, stack=None),
                 color=alt.Color(
                     "year:N",
                     title="연도",
                     scale=alt.Scale(
                         domain=["2023", "2024", "2025"],
-                        range=["#F8D6DE", "#A5DAEB", "#CBDD85"],
+                        range=["#F3B7C5", "#8AD4ED", "#B8CC66"],
                     ),
                 ),
                 tooltip=["year:N", "hour:O", "count:Q"],
@@ -231,13 +230,13 @@ def show_useStatus():
 
         with col_year:
             st.markdown("**연도별 이용 건수**")
-            yearly_df = get_dummy_yearly_totals()  # TODO: 실제 데이터로 교체
+            yearly_df = get_yearly_total()
             yearly_chart = (
                 alt.Chart(yearly_df)
                 .mark_bar(size=50, color="#CBDD85")
                 .encode(
-                    x=alt.X("연도:O", title=None),
-                    y=alt.Y("건수:Q", title="건수"),
+                    x=alt.X("연도:O", title=None, axis=alt.Axis(labelAngle=0)),
+                    y=alt.Y("건수:Q", title=None),
                     tooltip=["연도", "건수"],
                 )
             )
@@ -245,14 +244,14 @@ def show_useStatus():
 
         with col_month:
             st.markdown("**월별 이용 건수 (연도별 비교)**")
-            monthly_df = get_dummy_monthly_by_year()  # TODO: 실제 데이터로 교체
+            monthly_df = get_monthly_by_year()  # TODO: 실제 데이터로 교체
             monthly_chart = (
                 alt.Chart(monthly_df)
                 .mark_bar()
                 .encode(
-                    x=alt.X("월:N", title=None, sort=None),
+                    x=alt.X("월:N", title=None, sort=None, axis=alt.Axis(labelAngle=0)),
                     xOffset="연도:N",
-                    y=alt.Y("건수:Q", title="건수"),
+                    y=alt.Y("건수:Q", title=None),
                     color=alt.Color(
                         "연도:N",
                         title="연도",
