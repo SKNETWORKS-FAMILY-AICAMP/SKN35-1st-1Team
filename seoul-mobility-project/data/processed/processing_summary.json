@@ -1,9 +1,0 @@
-{
-  "total_records": 1729476,
-  "completed_records": 1483324,
-  "cancelled_records": 245337,
-  "completed_and_cancelled_records": 2,
-  "missing_scheduled_datetime": 0,
-  "invalid_negative_ride_time": 0,
-  "invalid_negative_request_to_dispatch": 1
-}
