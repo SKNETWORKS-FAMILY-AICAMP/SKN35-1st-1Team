@@ -1,25 +1,27 @@
 /* ==========================================================================
-   이용현황
-   ========================================================================== */
+ * 이용현황 화면 전용 스타일
+ * 색상 값은 style.css의 :root 변수를 참조한다.
+ * ========================================================================== */
 
-   
+/* 우측 강조 정보 패널 */
 .st-key-panel_dark {
-    background-color: #CBDD85 !important;
-    color: #3A4122 !important;
+    background-color: var(--color-highlight-bg) !important;
+    color: var(--color-highlight-text) !important;
     padding: 1.6rem;
     border-radius: 12px;
 }
 
+/* 패널 카드가 옆 지도 카드와 높이를 맞추도록 */
 div[data-testid="stLayoutWrapper"]:has(> div.st-key-panel_dark) {
     height: 100% !important;
 }
 
+/* 하단 안내 카드 (정기점검/상담지원) */
 div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] {
-    background-color: #F1F3F5 !important;
-    color: #1B1B1B !important;
+    background-color: var(--color-bg-subtle) !important;
+    color: var(--color-text) !important;
 }
-
 div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] p,
 div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] span {
-    color: #1B1B1B !important;
+    color: var(--color-text) !important;
 }
