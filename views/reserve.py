@@ -19,6 +19,7 @@ def get_congestion_message() -> tuple[str, bool]:
         return f"⚠️ 현재 {now_hour}시는 콜택시 이용이 많은 시간대입니다. 대기시간이 평소보다 길 수 있어요.", True
     return f"✅ 현재 {now_hour}시는 비교적 원활한 시간대입니다.", False
 
+
 # 입력폼 검증
 def validate_form(data: dict) -> list[str]:
     """필수 입력 체크 + 연락처 숫자 검증, 문제 있으면 에러 메시지 리스트 반환"""
@@ -36,8 +37,6 @@ def validate_form(data: dict) -> list[str]:
     return errors
 
 
-
-
 # 입력 정보 요약형태로 변환
 def generate_summary(data: dict) -> str:
     lines = [
@@ -50,6 +49,7 @@ def generate_summary(data: dict) -> str:
         f"■ 왕복 여부: {'예' if data['round_trip'] else '아니오'}",
     ]
     return "\n".join(lines)
+
 
 # 예약하기
 def show_reserve():
