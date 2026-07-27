@@ -594,6 +594,7 @@ dependencies = [
     { name = "dotenv" },
     { name = "folium" },
     { name = "mysql-connector-python" },
+    { name = "pymysql" },
     { name = "streamlit" },
     { name = "streamlit-folium" },
 ]
@@ -604,6 +605,7 @@ requires-dist = [
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "folium", specifier = ">=0.20.0" },
     { name = "mysql-connector-python", specifier = ">=9.7.0" },
+    { name = "pymysql", specifier = ">=1.2.0" },
     { name = "streamlit", specifier = ">=1.60.0" },
     { name = "streamlit-folium", specifier = ">=0.27.3" },
 ]
@@ -677,6 +679,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f4/c9/f71032fca47ecc09d30904d9a610234b07139f89eabc2f054b141edcc30f/pydeck-0.9.3.tar.gz", hash = "sha256:695775cbfe51f5fdffbd9735ba469987fdc5efc96bc40a0ee4808170509c78b2", size = 5900912, upload-time = "2026-07-02T23:27:08.704Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/6f/34/3998411437aff304a9ed4fa37a6fe1ef3132bcd2b5eac59851b80c86123c/pydeck-0.9.3-py2.py3-none-any.whl", hash = "sha256:d8a47c11c81fb12d51b1feb42427ff4f0e13cb599e48931021b2cba98b6849a6", size = 11428091, upload-time = "2026-07-02T23:27:06.399Z" },
+]
+
+[[package]]
+name = "pymysql"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c9/bc/1c6a92f385940f727daeecf3bacaf186e03875dff57197801046c583bcf0/pymysql-1.2.0.tar.gz", hash = "sha256:6c7b17ca686988104d7426c27895b455cdeea3e9d3ceb1270f0c3704fead8c33", size = 49021, upload-time = "2026-05-19T08:26:22.302Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c4/bd/2534e130295c8cfd4f0a2e31623baab7502278f1e97bcfe61db75656a77f/pymysql-1.2.0-py3-none-any.whl", hash = "sha256:62169ce6d5510f08e140c5e7990ee884a9764024e4a9a27b2cc11f1099322ae0", size = 45716, upload-time = "2026-05-19T08:26:20.974Z" },
 ]
 
 [[package]]
