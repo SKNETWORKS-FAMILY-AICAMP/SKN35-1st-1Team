@@ -1,0 +1,8 @@
+[theme]
+# 앱 메인색상 (강조색) — 탭 밑줄·위젯 포커스·아이콘 등 전역 적용
+primaryColor = "#1a365d"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f2f5f9"
+textColor = "#1f2937"
+# 접근성: 장애인 이용자 대상 — 기본 글씨를 키운다
+baseFontSize = 18

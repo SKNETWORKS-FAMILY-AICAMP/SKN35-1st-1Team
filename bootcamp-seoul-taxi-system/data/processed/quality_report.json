@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-07-24T20:51:31",
+  "faq_count": 21,
+  "keyword_count": 105,
+  "source_count": 8,
+  "category_distribution": {
+    "이용방법·접수": 7,
+    "준수사항·기타": 3,
+    "이용대상·자격": 3,
+    "운행지역·시간": 3,
+    "가입·등록": 2,
+    "배차·대기": 2,
+    "요금·결제": 1
+  },
+  "answer_length": {
+    "min": 49,
+    "max": 2507,
+    "mean": 702.3
+  },
+  "null_check": {
+    "faq_id": 0,
+    "category": 0,
+    "question": 0,
+    "answer": 0,
+    "answer_length": 0,
+    "source_code": 0,
+    "source_name": 0,
+    "source_url": 0,
+    "collect_method": 0,
+    "orig_msg_seq": 13,
+    "view_count": 13,
+    "department": 0,
+    "content_hash": 0,
+    "collected_at": 0
+  },
+  "cross_validation": {
+    "checked": 8,
+    "selenium_total": 8,
+    "avg_prefix_similarity": 0.968,
+    "conclusion": "Selenium 렌더링본은 목록 요약(축약)이고 BS4 상세본이 전문이므로 최종 적재는 BS4 상세 수집본을 채택",
+    "details": [
+      {
+        "question": "노후화된 장애인콜택시의 매각절차가 궁금합니다",
+        "bs4_len": 238,
+        "selenium_len": 229,
+        "prefix_similarity": 0.935
+      },
+      {
+        "question": "장애인콜택시를 처음 이용하는 경우 어떻게 신청해야하는지 알고 싶습니다",
+        "bs4_len": 423,
+        "selenium_len": 335,
+        "prefix_similarity": 0.985
+      },
+      {
+        "question": "장애인콜택시의 이용자격은 어떻게 되는지 알고 싶습니다",
+        "bs4_len": 635,
+        "selenium_len": 319,
+        "prefix_similarity": 0.965
+      },
+      {
+        "question": "장애인콜택시 차량 연결이 지연되고 있습니다",
+        "bs4_len": 334,
+        "selenium_len": 332,
+        "prefix_similarity": 0.98
+      },
+      {
+        "question": "장애인콜택시 운전원으로 취업을 하려면 어떻게 해야하는지 알고 싶습니다",
+        "bs4_len": 641,
+        "selenium_len": 328,
+        "prefix_similarity": 0.98
+      },
+      {
+        "question": "장애인콜택시 운행시간 및 요금수준에 대해 알고 싶습니다",
+        "bs4_len": 217,
+        "selenium_len": 217,
+        "prefix_similarity": 0.97
+      },
+      {
+        "question": "장애인콜택시를 이용하기 위한 접수방법을 알고 싶습니다",
+        "bs4_len": 594,
+        "selenium_len": 358,
+        "prefix_similarity": 0.945
+      },
+      {
+        "question": "장애인콜택시 운행지역은 어디인지 알고 싶습니다",
+        "bs4_len": 306,
+        "selenium_len": 306,
+        "prefix_similarity": 0.985
+      }
+    ]
+  }
+}
