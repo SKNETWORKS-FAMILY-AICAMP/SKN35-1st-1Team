@@ -1,4 +1,4 @@
-# 햬치타GO
+# 해치타GO
 
 > 서울시 장애인콜택시 이용현황 분석 및 조회 시스템
 
@@ -165,3 +165,8 @@ uv run streamlit run main.py
 ```
 
 ## 실행 화면 예시
+![HOME](./docs/hachitago_main.png)
+![USESTATE](./docs/hachitago_usestate.png)
+![RESERVE](./docs/hachitago_reserve.png)
+![FAQ](./docs/hachitago_faq.png)
+![NEWS](./docs/hachitago_news.png)
