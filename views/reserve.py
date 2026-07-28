@@ -405,7 +405,7 @@ def render():
                 )
                 st.link_button(
                     "🌐 인터넷 접수 페이지로 이동",
-                    "https://calltaxi.sisul.or.kr/member/login.asp",
+                    "https://www.sisul.or.kr/open_content/calltaxi/",
                     use_container_width=True,
                 )
 
