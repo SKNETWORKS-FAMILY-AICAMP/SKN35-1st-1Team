@@ -195,5 +195,5 @@ uv run streamlit run main.py
 ![RESERVE](./docs/hachitago_reserve.png)
 ### 4. FAQ
 ![FAQ](./docs/hachitago_faq.png)
-### 5. 관련뉴스
+### 5. 관련뉴스1
 ![NEWS](./docs/hachitago_news.png)
