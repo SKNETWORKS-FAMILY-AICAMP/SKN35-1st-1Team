@@ -8,7 +8,7 @@
 from __future__ import annotations
 import streamlit as st
 from common.assets import FACE_URI
-from common.brand import BRAND_EN, BRAND_KO, NAV_ORDER, PAGES, TAGLINE
+from common.brand import BRAND_EN, BRAND_KO, NAV_ORDER, PAGES
 
 def render_sidebar() -> None:
     """브랜드 헤더 + 메뉴 버튼 + 안내 문구를 사이드바에 그린다."""
@@ -18,8 +18,7 @@ def render_sidebar() -> None:
             <a class="brand" href="?nav=home" target="_self" title="홈으로" style="margin-bottom: 3rem;">
                 <img src="{FACE_URI}" alt="해치"/>
                 <div>
-                    <div class="brand-name">{BRAND_KO} <span>{BRAND_EN}</span></div>
-                    <div class="brand-sub">{TAGLINE}</div>
+                    <div class="brand-name">{BRAND_KO} <br/><span>{BRAND_EN}</span></div>
                 </div>
             </a>
             """,

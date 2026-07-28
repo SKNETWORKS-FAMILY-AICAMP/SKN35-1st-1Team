@@ -54,6 +54,11 @@
     --shadow-tile-hover:0 16px 34px rgba(26, 54, 93, 0.16);
 }
 
+[class*="st-key-reservation_summary"] {
+    background-color: var(--badge-welfare-bg) !important;
+    border: 0 !important;
+}
+
 
 /* ---------- 전역 타이포 ---------- */
 h1, h2, h3 { color: var(--color-secondary-dark); }
@@ -74,9 +79,9 @@ section[data-testid="stSidebar"] {
 }
 .brand, .brand *, .home-link { text-decoration: none !important; }
 .brand:hover { background: #EEF2F8; }
-.brand img { width: 42px; height: 42px; }
-.brand-name { font-size: 1.2rem; font-weight: 900; color: var(--color-primary); line-height: 1.15; }
-.brand-name span { font-size: 0.72rem; font-weight: 700; color: var(--color-primary-light); }
+.brand img { margin-top: -13px; width: 50px; height: 50px; }
+.brand-name { font-size: 2rem; font-weight: 900; color: var(--color-primary); line-height: 0.9; }
+.brand-name span { font-size: 1.1rem; font-weight: 700; color: var(--color-primary-light); }
 .brand-sub { font-size: 0.76rem; color: var(--color-text-faint); margin-top: 2px; }
 
 .home-link {

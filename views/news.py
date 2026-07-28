@@ -154,22 +154,22 @@ def _card_html(item: dict[str, str]) -> str:
     source = escape(item["source"])
     url = escape(_safe_url(item["url"]), quote=True)
 
-    return f"""
-    <div class="ncard">
-        <div class="ncard-top">
-            <span class="nbadge {cate_class}">{cat}</span>
-            <span class="ndate">{date}</span>
-        </div>
-        <div class="ntitle">{title}</div>
-        <div class="ndesc">{desc}</div>
-        <div class="ndiv"></div>
-        <div class="ncard-bot">
-            <span class="nsource">{source}</span>
-            <a class="nlink" href="{url}" target="_blank"
-               rel="noopener noreferrer">원문보기 ↗</a>
-        </div>
-    </div>
-    """
+    return (
+        f'<div class="ncard">'
+        f'<div class="ncard-top">'
+        f'<span class="nbadge {cate_class}">{cat}</span>'
+        f'<span class="ndate">{date}</span>'
+        f'</div>'
+        f'<div class="ntitle">{title}</div>'
+        f'<div class="ndesc">{desc}</div>'
+        f'<div class="ndiv"></div>'
+        f'<div class="ncard-bot">'
+        f'<span class="nsource">{source}</span>'
+        f'<a class="nlink" href="{url}" target="_blank" '
+        f'rel="noopener noreferrer">원문보기 ↗</a>'
+        f'</div>'
+        f'</div>'
+    )
 
 
 def _pagination(cat: str, page: int, pages: int) -> None:
@@ -272,10 +272,8 @@ def _grid(
         return
 
     start = (page - 1) * PER_PAGE
-    grid = st.columns(2, gap="medium")
-    for index, item in enumerate(items[start : start + PER_PAGE]):
-        with grid[index % 2]:
-            st.markdown(_card_html(item), unsafe_allow_html=True)
+    cards_html = "".join(_card_html(item) for item in items[start : start + PER_PAGE])
+    st.markdown(f'<div class="ncard-grid">{cards_html}</div>', unsafe_allow_html=True)
 
     _pagination(cat, page, pages)
 

@@ -1,5 +1,5 @@
 """
-해치타GO (Haechi Ta-GO) — 팀 통합 앱 진입점
+해치타GO (장애인 콜택시) — 팀 통합 앱 진입점
 --------------------------------------------
 "해치와 소울 프렌즈가 함께 타고 달리는 따뜻한 이동 서비스"
 
@@ -24,7 +24,7 @@ from common.brand import PAGES
 from views import faq, home, news, placeholder, reserve, useStatus
 
 st.set_page_config(
-    page_title="해치타GO (Haechi Ta-GO)",
+    page_title="해치타GO (장애인 콜택시)",
     page_icon="🚕",
     layout="wide",
     initial_sidebar_state="expanded",

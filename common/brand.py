@@ -8,7 +8,7 @@
 from __future__ import annotations
 
 BRAND_KO = "해치타GO"
-BRAND_EN = "Haechi Ta-GO"
+BRAND_EN = "장애인 콜택시"
 TAGLINE = "해치와 소울 프렌즈가 함께 타고 달리는 따뜻한 이동 서비스"
 
 # 페이지 정의 — key가 곧 라우팅 값(?nav=<key>)이자 session_state.menu 값이다.

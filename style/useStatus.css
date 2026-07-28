@@ -25,3 +25,9 @@ div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] p,
 div[data-testid="stVerticalBlock"][class*="st-key-info_box_"] span {
     color: var(--color-text) !important;
 }
+
+/* 예약하기 - 요약 코드블록 배경 투명하게 */
+[class*="st-key-reservation_summary"] pre,
+[class*="st-key-reservation_summary"] pre code {
+    background-color: transparent !important;
+}

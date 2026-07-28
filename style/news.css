@@ -9,14 +9,23 @@
 .stTabs [aria-selected="true"] { color: var(--color-secondary); }
 
 
+/* ---------- 뉴스 카드 그리드 (2열, 같은 행 높이 자동 맞춤) ---------- */
+.ncard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+}
+
 /* ---------- 뉴스 카드 ---------- */
 .ncard {
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: 16px;
     padding: 20px 22px;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     min-height: 212px;
+    height: 100%;
     box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
@@ -58,7 +67,7 @@
 
 /* ---------- 카테고리 뱃지 (인라인 style 대신 클래스로 관리) ---------- */
 .nbadge { font-size: 0.82rem; font-weight: 700; padding: 4px 12px; border-radius: 12px;
-    background: #EEF2F7; color: #374151; }
+    background: #EEF2F7; color: #374151; white-space: nowrap; }
 .nbadge.welfare { background: var(--badge-welfare-bg); color: var(--badge-welfare-text); }
 .nbadge.support { background: var(--badge-support-bg); color: var(--badge-support-text); }
 .nbadge.taxi    { background: var(--badge-taxi-bg);    color: var(--badge-taxi-text); }

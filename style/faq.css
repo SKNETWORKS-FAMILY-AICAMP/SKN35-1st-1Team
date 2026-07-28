@@ -16,8 +16,9 @@
 
 /* 접근성: 질문 텍스트 크게 */
 div[data-testid="stExpander"] details summary p {
-    font-size: 1.12rem;
+    font-size: 1rem;
     font-weight: 700;
+    color: var(--color-highlight-text);
 }
 
 .faq-answer { font-size: 1.05rem; line-height: 1.85; color: var(--color-text); }
@@ -30,10 +31,22 @@ div[data-testid="stExpander"] details summary p {
     padding-top: 10px;
 }
 
+/* "N건의 질문이 조회되었습니다." 문구 하단 여백 */
+.faq-result-count {
+    margin: 1rem 0 2rem;
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+/* 아코디언(질문) 버튼 두께 */
+div[data-testid="stExpander"] details summary {
+    padding: 1rem 0.75rem;
+}
+
 .kw-chip {
     display: inline-block;
     background: #EEF4FF;
-    color: var(--color-secondary-dark);
+    color: var(--color-text-secondary);
     border-radius: 12px;
     padding: 2px 10px;
     margin: 2px 4px 2px 0;

@@ -165,31 +165,32 @@ def show_recommended_hours(recommended_hours):
     if not recommended_hours:
         return
 
-    recommendation_texts = []
+    st.markdown("#### 비교적 원활한 추천 시간")
 
-    for row in recommended_hours:
+    best_hour = min(
+        (row for row in recommended_hours if row["avg_wait_minutes"] is not None),
+        key=lambda row: float(row["avg_wait_minutes"]),
+        default=None,
+    )
+
+    cols = st.columns(len(recommended_hours))
+    for col, row in zip(cols, recommended_hours):
         hour = int(row["request_hour"])
         request_count = int(row["request_count"])
         avg_wait = row["avg_wait_minutes"]
 
-        if avg_wait is not None:
-            text = (
-                f"**{hour:02d}:00** "
-                f"· 이용 {request_count:,}건 "
-                f"· 평균 대기 {float(avg_wait):.0f}분"
-            )
-        else:
-            text = (
-                f"**{hour:02d}:00** "
-                f"· 이용 {request_count:,}건"
-            )
-
-        recommendation_texts.append(text)
-
-    st.markdown("#### 비교적 원활한 추천 시간")
-
-    for text in recommendation_texts:
-        st.markdown(f"- {text}")
+        with col:
+            with st.container(border=True):
+                # if best_hour is not None and row is best_hour:
+                #     st.markdown(":orange-background[Best Time]")
+                st.markdown(f"🕐 **{hour:02d}:00**")
+                st.caption(f"누적 이용 {request_count:,}건")
+                if avg_wait is not None:
+                    st.markdown( 
+                        f'<span style="color:#8D9A59; font-weight:700;">'
+                        f'평균 대기 {float(avg_wait):.0f}분</span>',
+                        unsafe_allow_html=True,
+                    )
 
 # ---------------------------------------------------------
 # 입력폼 검증
@@ -278,7 +279,7 @@ def render():
 
             with c1:
                 depart = st.text_input(
-                    "출발지 (Departure)",
+                    "출발지",
                     value=st.session_state.get(
                         "prefill_depart",
                         "",
@@ -309,7 +310,7 @@ def render():
                 )
 
             phone = st.text_input(
-                "연락처 (Contact Number)",
+                "연락처",
                 placeholder="010-0000-0000",
                 help="숫자와 하이픈을 입력할 수 있습니다.",
             )
@@ -347,18 +348,6 @@ def render():
 
     # ---------------- 우측 DB 안내 ----------------
     with col_side:
-        with st.spinner("과거 이용 데이터를 분석하고 있습니다."):
-            level, message, recommended_hours = (
-                get_congestion_message(date, time)
-            )
-
-        show_congestion_message(level, message)
-        show_recommended_hours(recommended_hours)
-
-        st.caption(
-            "2023~2025년 동일 요일·시간대의 이용 통계를 "
-            "바탕으로 한 참고 정보이며 실제 배차시간을 보장하지 않습니다."
-        )
 
         # ---------------- 예약정보 요약 ----------------
         if submitted:
@@ -387,41 +376,52 @@ def render():
             else:
                 summary_text = generate_summary(form_data)
 
-                st.divider()
-                st.subheader("예약정보 요약")
-
-                st.markdown(
-                    "아래 내용을 복사해서 문자로 접수하거나, "
-                    "전화로 그대로 말씀하시면 됩니다."
-                )
-
-                st.code(
-                    summary_text,
-                    language=None,
-                )
-
-                st.warning(
-                    "아직 예약이 완료되지 않았습니다. "
-                    "아래 공식 접수 방법 중 하나를 이용해주세요."
-                )
-
+                with st.container(border=True, key="reservation_summary"):
+                    st.subheader("예약정보 요약")
+                    st.markdown(
+                        "<span style='color:#7D7669;'>"
+                        "아래 내용을 복사해서 문자로 접수하거나, "
+                        "전화로 그대로 말씀하시면 됩니다."
+                        "</span>",
+                        unsafe_allow_html=True,
+                    )
+                    st.code(
+                        summary_text,
+                        language=None,
+                    )
+                    # st.warning(
+                    #     "아직 예약이 완료되지 않았습니다. "
+                    #     "아래 공식 접수 방법 중 하나를 이용해주세요."
+                    # )
                 st.link_button(
                     "📞 콜센터로 전화하기",
                     "tel:15884388",
                     use_container_width=True,
                 )
-
                 st.link_button(
                     "💬 문자로 접수하기",
                     "sms:15884388",
                     use_container_width=True,
                 )
-
                 st.link_button(
                     "🌐 인터넷 접수 페이지로 이동",
                     "https://calltaxi.sisul.or.kr/member/login.asp",
                     use_container_width=True,
                 )
+
+    # ---------------- 하단: 혼잡도 안내 + 추천 시간대 (전체 폭) ----------------
+    st.write("")
+
+    with st.spinner("과거 이용 데이터를 분석하고 있습니다."):
+        level, message, recommended_hours = get_congestion_message(date, time)
+
+    show_congestion_message(level, message)
+    show_recommended_hours(recommended_hours)
+
+    st.caption(
+        "2023~2025년 동일 요일·시간대의 이용 통계를 "
+        "바탕으로 한 참고 정보이며 실제 배차시간을 보장하지 않습니다."
+    )
 
 if __name__ == "__main__":
     st.set_page_config(
