@@ -115,13 +115,13 @@ def render():
 
     # 타이틀
     st.title("실시간 이용현황 분석")
-    st.markdown("서울시 25개 자치구별 콜택시 수요와 대기 시간을 분석하여 투명한 정보를 제공합니다.")
+    st.markdown("서울시 25개 자치구별 장애인 콜택시 수요와 대기 시간을 분석하여 투명한 정보를 제공합니다.")
 
     col_map, col_panel = st.columns([2, 1])
 
     # ---------- 지도 카드 (기본 container) ----------
     with col_map:
-        with st.container(border=True):
+        with st.container(height=700):
             st.markdown("**자치구별 현황 지도**")
             m = build_map(selected_gu=st.session_state.selected_gu)
             map_data = st_folium(m, width=None, height=580, key="seoul_map")
