@@ -84,8 +84,6 @@ def _render_data_info(repo, status: str) -> None:
         st.caption(
             "원본: 서울시설공단 장애인콜택시 공식 홈페이지 "
             "(가입안내 · 이용기준 · 이용방법 · 자주하는질문 게시판)  \n"
-            f"수집: BeautifulSoup + Selenium · 저장: MySQL `{config.DB_NAME}`  \n"
-            f"현재 조회 방식: **{repo.backend}** — {status}"
         )
 
 
