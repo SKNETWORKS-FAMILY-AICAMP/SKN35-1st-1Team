@@ -284,7 +284,7 @@ def render() -> None:
     """관련뉴스 화면을 그린다."""
     styles.load("news.css")
 
-    st.header("📰 관련뉴스")
+    st.title("관련뉴스")
     st.caption("장애인콜택시와 관련된 최신 소식과 정책 변화, 이용 안내 정보를 한눈에 확인하세요.")
 
     try:
@@ -313,5 +313,3 @@ def render() -> None:
     #     f"총 {len(all_items)}건 · 데이터 파일 갱신 "
     #     f"{loaded_at:%Y.%m.%d %H:%M}"
     # )
-
-    st.caption("※ 표시된 소식은 UI 예시(Dummy) 콘텐츠입니다.")
