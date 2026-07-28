@@ -1,35 +1,81 @@
 /* ==========================================================================
-   관련뉴스 화면 전용 스타일
-   탭 + 2열 카드 그리드 + 페이지네이션
-   ========================================================================== */
+ * 관련뉴스 화면 전용 스타일
+ * 탭 + 2열 카드 그리드 + 페이지네이션
+ * 색상 값은 style.css의 :root 변수를 참조한다.
+ * ========================================================================== */
 
-.stTabs [data-baseweb="tab"] { font-size:1.12rem; font-weight:700; padding:10px 20px; }
-.stTabs [aria-selected="true"] { color:var(--primary); }
+/* ---------- 탭 ---------- */
+.stTabs [data-baseweb="tab"] { font-size: 1.12rem; font-weight: 700; padding: 10px 20px; }
+.stTabs [aria-selected="true"] { color: var(--color-secondary); }
+
+
+/* ---------- 뉴스 카드 그리드 (2열, 같은 행 높이 자동 맞춤) ---------- */
+.ncard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+}
 
 /* ---------- 뉴스 카드 ---------- */
-.ncard { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:20px 22px;
-    margin-bottom:16px; box-shadow:0 1px 5px rgba(0,0,0,0.05); min-height:212px;
-    display:flex; flex-direction:column; transition:box-shadow .15s ease, transform .15s ease; }
-.ncard:hover { box-shadow:0 8px 22px rgba(26,54,93,0.14); transform:translateY(-2px); }
-.ncard-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-.ndate { color:#9aa4b2; font-size:0.9rem; }
-.ntitle { font-size:1.25rem; font-weight:800; color:var(--primary); line-height:1.4; margin-bottom:8px;
-    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.ndesc { font-size:1.02rem; color:#4b5563; line-height:1.6; flex:1;
-    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.ndiv { border-top:1px solid #eef0f3; margin:14px 0 12px; }
-.ncard-bot { display:flex; justify-content:space-between; align-items:center; }
-.nsource { color:var(--primary); font-weight:700; font-size:0.95rem; }
-.nlink { color:var(--accent); font-weight:700; font-size:0.95rem; text-decoration:none; }
-.nlink:hover { text-decoration:underline; }
+.ncard {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    /* margin-bottom: 16px; */
+    min-width: 0;
+    min-height: 212px;
+    height: 100%;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .15s ease, transform .15s ease;
+}
+.ncard:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
 
-/* 카테고리 뱃지 — 인라인 style 대신 클래스로 관리한다 */
-.nbadge { font-size:0.82rem; font-weight:700; padding:4px 12px; border-radius:12px;
-    background:#eef2f7; color:#374151; }
-.nbadge.welfare { background:#e8eef6; color:#1a365d; }
-.nbadge.support { background:#fef1e0; color:#b45309; }
-.nbadge.taxi    { background:#e4f5ec; color:#0f7a44; }
+.ncard-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.ndate { color: var(--color-text-faint); font-size: 0.9rem; }
+
+.ntitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    /* color: var(--color-secondary-dark); */
+    line-height: 1.4;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+.ndesc {
+    font-size: 1.02rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.ndiv { border-top: 1px solid #EEF0F3; margin: 14px 0 12px; }
+.ncard-bot { display: flex; justify-content: space-between; align-items: center; }
+.nsource { color: var(--color-text-muted); font-size: 0.95rem; }
+.nlink { color: var(--color-accent) !important; font-size: 0.95rem; text-decoration: none; }
+.nlink:hover { text-decoration: underline; }
+
+
+/* ---------- 카테고리 뱃지 (인라인 style 대신 클래스로 관리) ---------- */
+.nbadge { font-size: 0.82rem; font-weight: 700; padding: 4px 12px; border-radius: 12px;
+    background: #EEF2F7; color: #374151; white-space: nowrap; }
+.nbadge.welfare { background: var(--badge-welfare-bg); color: var(--badge-welfare-text); }
+.nbadge.support { background: var(--badge-support-bg); color: var(--badge-support-text); }
+.nbadge.taxi    { background: var(--badge-taxi-bg);    color: var(--badge-taxi-text); }
+
 
 /* ---------- 페이지네이션 ---------- */
-[class*="st-key-pg_"] button { border-radius:10px; font-weight:700; min-width:46px; }
-[class*="st-key-pg_"] button[kind="primary"] { background:var(--primary); color:#fff; }
+[class*="st-key-pg_"] button { border-radius: 10px; font-weight: 700; min-width: 46px; }
+[class*="st-key-pg_"] button[kind="primary"] { background: var(--color-secondary); color: #fff; }

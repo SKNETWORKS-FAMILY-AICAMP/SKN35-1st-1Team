@@ -1,42 +1,125 @@
 /* ==========================================================================
-   해치타GO — 공통 스타일
-   모든 페이지에서 로드된다. 페이지 전용 스타일은 style/<page>.css 로 분리한다.
-   ========================================================================== */
+ * 해치타GO — 공통 스타일 & 컬러 팔레트
+ * 모든 페이지에서 로드된다. 페이지 전용 스타일은 style/<page>.css 로 분리한다.
+ * 색상은 반드시 여기 정의된 변수(var(--xxx))로만 참조하고,
+ * 페이지별 CSS에 새 hex 값을 직접 쓰지 않는다.
+ * ========================================================================== */
 
-:root {
-    --primary: #1a365d;
-    --primary-dark: #0f2440;
-    --accent: #2c5282;
-    --warm: #e07b39;
+
+/* Material Symbols 아이콘 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-size: 2rem;
 }
 
-h1, h2, h3 { color: var(--primary-dark); }
+:root {
+    /* ---- 브랜드 컬러 ---- */
+    --color-primary:        #745C01;
+    --color-primary-light:  #7D7669;
+    --color-secondary:      #8D9A59;  /* 올리브 그린 (메인 브랜드 컬러) */
+    --color-secondary-dark: #7B8847;  /* 브랜드 컬러의 진한 톤 (제목, 강조) */
+    --color-accent:         var(--color-primary);  /* 네이비 (링크, 포인트) */
+
+    /* ---- 강조 패널 (이용현황 등 하이라이트 박스) ---- */
+    --color-highlight-bg:   #CBDD85;  /* 밝은 올리브 (패널 배경) */
+    --color-highlight-text: #3A4122;  /* 패널 위 텍스트 (배경과 대비) */
+
+    /* ---- 텍스트 ---- */
+    --color-text:            #1B1B1B; /* 기본 본문 */
+    --color-text-secondary:  #4B5563; /* 보조 설명 */
+    --color-text-muted:      #6B7280; /* 흐린 텍스트 (날짜, 캡션) */
+    --color-text-faint:      #9AA4B2; /* 가장 흐린 텍스트 */
+
+    /* ---- 배경 & 테두리 ---- */
+    --color-bg-subtle:    #F1F3F5;  /* 옅은 회색 배경 (안내 박스 등) */
+    --color-bg-sidebar:   #F7F9FC;  /* 사이드바 배경 */
+    --color-border:       #E5E7EB;  /* 기본 테두리 */
+    --color-border-soft:  #E6E9F0;  /* 카드 테두리 (더 옅음) */
+    --color-border-dashed:#D1D5DB;  /* 점선 구분선 */
+
+    /* ---- 뉴스 카테고리 뱃지 ---- */
+    --badge-welfare-bg:   #E8EEF6;
+    --badge-welfare-text: var(--color-text);
+    --badge-support-bg:   #FEF1E0;
+    --badge-support-text: #B45309;
+    --badge-taxi-bg:      #E4F5EC;
+    --badge-taxi-text:    #0F7A44;
+
+    /* ---- 그림자 ---- */
+    --shadow-card:      0 1px 5px rgba(0, 0, 0, 0.05);
+    --shadow-card-hover:0 8px 22px rgba(26, 54, 93, 0.14);
+    --shadow-tile:      0 2px 10px rgba(0, 0, 0, 0.05);
+    --shadow-tile-hover:0 16px 34px rgba(26, 54, 93, 0.16);
+}
+
+[class*="st-key-reservation_summary"] {
+    background-color: var(--badge-welfare-bg) !important;
+    border: 0 !important;
+}
+
+
+/* ---------- 전역 타이포 ---------- */
+h1, h2, h3 { color: var(--color-secondary-dark); }
+
 
 /* ---------- 사이드바 ---------- */
-section[data-testid="stSidebar"] { background:#f7f9fc; border-right:1px solid #e5e7eb; }
+section[data-testid="stSidebar"] {
+    background: var(--color-bg-sidebar);
+    border-right: 1px solid var(--color-border);
+}
 
-.brand { display:flex; align-items:center; gap:12px; padding:8px 6px 4px;
-    border-radius:12px; }
-.brand, .brand *, .home-link { text-decoration:none !important; }
-.brand:hover { background:#eef2f8; }
-.brand img { width:42px; height:42px; }
-.brand-name { font-size:1.2rem; font-weight:900; color:var(--primary); line-height:1.15; }
-.brand-name span { font-size:0.72rem; font-weight:700; color:#8a94a3; }
-.brand-sub { font-size:0.76rem; color:#9aa4b2; margin-top:2px; }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 6px 4px;
+    border-radius: 12px;
+}
+.brand, .brand *, .home-link { text-decoration: none !important; }
+.brand:hover { background: #EEF2F8; }
+.brand img { margin-top: -13px; width: 50px; height: 50px; }
+.brand-name { font-size: 2rem; font-weight: 900; color: var(--color-primary); line-height: 0.9; }
+.brand-name span { font-size: 1.1rem; font-weight: 700; color: var(--color-primary-light); }
+.brand-sub { font-size: 0.76rem; color: var(--color-text-faint); margin-top: 2px; }
 
-.home-link { display:inline-block; margin:6px 6px 2px; font-size:0.86rem; font-weight:700;
-    color:var(--accent); text-decoration:none; }
-.home-link:hover { text-decoration:underline; }
+.home-link {
+    display: inline-block;
+    margin: 6px 6px 2px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+.home-link:hover { text-decoration: underline; }
 
-.nav-cap { font-size:0.78rem; font-weight:700; letter-spacing:.04em; color:#8a94a3;
-    margin:14px 6px 6px; text-transform:uppercase; }
+.nav-cap {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--color-text-faint);
+    margin: 14px 6px 6px;
+    text-transform: uppercase;
+}
 
-[class*="st-key-nav_"] button { justify-content:flex-start !important; text-align:left;
-    font-size:1.05rem; font-weight:700; border-radius:12px; padding:12px 14px;
-    border:none; margin-bottom:2px; min-height:48px; }
-[class*="st-key-nav_"] button p { font-size:1.05rem; font-weight:700; }
-[class*="st-key-nav_"] button[kind="secondary"] { background:transparent; color:#374151; }
-[class*="st-key-nav_"] button[kind="secondary"]:hover { background:#e8edf3; color:var(--primary); }
-[class*="st-key-nav_"] button[kind="primary"] { background:var(--primary); color:#fff;
-    box-shadow:0 2px 8px rgba(26,54,93,0.25); }
-[class*="st-key-nav_"] button[kind="primary"] p { color:#fff; }
+/* 사이드바 메뉴 버튼 */
+[class*="st-key-nav_"] button {
+    justify-content: flex-start !important;
+    text-align: left;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: none;
+    margin-bottom: 2px;
+    min-height: 48px;
+}
+[class*="st-key-nav_"] button p { font-size: 1.05rem; font-weight: 700; }
+[class*="st-key-nav_"] button[kind="secondary"] { background: transparent; color: var(--color-text-secondary); }
+[class*="st-key-nav_"] button[kind="secondary"]:hover { background: #E8EDF3; color: var(--color-secondary); }
+[class*="st-key-nav_"] button[kind="primary"] {
+    background: var(--color-secondary);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(26, 54, 93, 0.25);
+}
+[class*="st-key-nav_"] button[kind="primary"] p { color: #fff; }

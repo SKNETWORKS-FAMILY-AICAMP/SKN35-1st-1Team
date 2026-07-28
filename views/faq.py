@@ -28,15 +28,15 @@ from common.text import to_html
 from db.repository import get_repository
 
 # 카테고리별 아이콘 (화면 인지성 향상)
-CATEGORY_ICON = {
-    "가입·등록": "📝",
-    "이용대상·자격": "👥",
-    "이용방법·접수": "📱",
-    "요금·결제": "💳",
-    "배차·대기": "🚕",
-    "운행지역·시간": "🗺",
-    "준수사항·기타": "📌",
-}
+# CATEGORY_ICON = {
+#     "가입·등록": "📝",
+#     "이용대상·자격": "👥",
+#     "이용방법·접수": "📱",
+#     "요금·결제": "💳",
+#     "배차·대기": "🚕",
+#     "운행지역·시간": "🗺",
+#     "준수사항·기타": "📌",
+# }
 
 
 @st.cache_resource(show_spinner=False)
@@ -84,9 +84,28 @@ def _render_data_info(repo, status: str) -> None:
         st.caption(
             "원본: 서울시설공단 장애인콜택시 공식 홈페이지 "
             "(가입안내 · 이용기준 · 이용방법 · 자주하는질문 게시판)  \n"
-            f"수집: BeautifulSoup + Selenium · 저장: MySQL `{config.DB_NAME}`  \n"
-            f"현재 조회 방식: **{repo.backend}** — {status}"
         )
+
+
+def _render_category_results(repo, keyword: str, category: str) -> None:
+    """탭 하나(카테고리 하나)의 검색 결과 — 요약 + 아코디언 목록."""
+    results = repo.search(keyword=keyword, category=category)
+
+    summary = f"{len(results)}건의 질문이 조회되었습니다."
+    if keyword.strip():
+        summary += f" (검색어: {keyword.strip()})"
+    st.markdown(f'<div class="faq-result-count">{summary}</div>', unsafe_allow_html=True)
+
+    if results.empty:
+        st.warning("검색 결과가 없습니다. 다른 검색어나 분류를 선택해 보세요.")
+        st.caption("자주 찾는 검색어: 가입, 요금, 접수, 대기, 운행지역")
+        return
+
+    for _, row in results.iterrows():
+        # icon = CATEGORY_ICON.get(row["category"], "❔")
+        # with st.expander(f"{icon} [{row['category']}] {row['question']}"):
+        with st.expander(f"[{row['category']}] {row['question']}"):
+            _render_answer(row, repo)
 
 
 def render() -> None:
@@ -96,9 +115,8 @@ def render() -> None:
     st.markdown(
         """
         <div class="faq-hero">
-            <h2>❓ 자주 묻는 질문</h2>
-            <p>서울시설공단 장애인콜택시 공식 안내를 질문·답변 형태로 정리했습니다.
-            궁금한 내용을 검색하거나 분류를 선택해 확인하세요.</p>
+            <h2 style="font-size:2.75rem">자주 묻는 질문</h2>
+            <p>궁금하신 점을 빠르게 확인해 보세요.</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -111,45 +129,31 @@ def render() -> None:
         return
 
     # ------------------------------------------------------------------ #
-    # 검색 조건
+    # 검색어 — 알약형 검색창 (전체 탭 공통)
     # ------------------------------------------------------------------ #
-    categories = ["전체"] + repo.list_categories()
-    c1, c2 = st.columns([2.2, 1])
-    keyword = c1.text_input(
+    keyword = st.text_input(
         "검색어",
-        placeholder="예: 요금, 예약, 휠체어, 대기시간",
+        placeholder="🔍  검색어를 입력해 주세요 (예: 요금, 예약 방법)",
+        label_visibility="collapsed",
         help="질문·답변 본문과 검색 키워드를 함께 찾습니다.",
     )
-    category = c2.selectbox("분류", categories)
-
-    results = repo.search(keyword=keyword, category=category)
 
     # ------------------------------------------------------------------ #
-    # 결과 요약
+    # 카테고리 탭 (news.py와 동일한 st.tabs 패턴)
     # ------------------------------------------------------------------ #
-    summary = f"**{len(results)}건**의 질문이 조회되었습니다."
-    if keyword.strip():
-        summary += f" (검색어: `{keyword.strip()}`)"
-    if category != "전체":
-        summary += f" (분류: {category})"
-    st.markdown(summary)
-
-    if results.empty:
-        st.warning("검색 결과가 없습니다. 다른 검색어나 분류를 선택해 보세요.")
-        st.caption("자주 찾는 검색어: 가입, 요금, 접수, 대기, 운행지역")
-        return
+    categories = ["전체"] + repo.list_categories()
+    tabs = st.tabs(categories)
+    for tab, category in zip(tabs, categories):
+        with tab:
+            _render_category_results(repo, keyword, category)
 
     # ------------------------------------------------------------------ #
-    # 아코디언 목록 (기획서 요구사항: st.expander 형태)
+    # 하단 CTA
     # ------------------------------------------------------------------ #
     st.write("")
-    for _, row in results.iterrows():
-        icon = CATEGORY_ICON.get(row["category"], "❔")
-        with st.expander(f"{icon} [{row['category']}] {row['question']}"):
-            _render_answer(row, repo)
 
     # ------------------------------------------------------------------ #
-    # 데이터 출처 및 연결 상태
+    # 데이터 출처 및 연결 상태 (기술 정보, 맨 아래)
     # ------------------------------------------------------------------ #
     st.write("")
     _render_data_info(repo, status)

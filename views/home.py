@@ -20,7 +20,10 @@ def _tile_html(key: str) -> str:
     sub = page["sub"].replace("\n", "<br>")
     return (
         f'<a class="tilecard" href="?nav={key}" target="_self">'
-        f'<div class="tile-ico">{page["icon"]}</div>'
+        f'<div class="tile-ico" style="background-color:{page["icon_bg"]}33;">'
+        f'<span class="material-symbols-outlined" style="color:{page["icon_color"]};">'
+        f'{page["icon"]}</span>'
+        f'</div>'
         f'<div class="tile-title">{page["label"]}</div>'
         f'<div class="tile-sub">{sub}</div>'
         f'</a>'
@@ -34,7 +37,7 @@ def render() -> None:
     st.markdown(
         '<div class="home-hero">'
         f'<img class="hero-illust" src="{SCENE_URI}" alt="해치타GO 캐릭터 일러스트"/>'
-        f'<div class="hero-logo">🚕 {BRAND_KO}<span class="en">{BRAND_EN}</span></div>'
+        f'<div class="hero-logo">{BRAND_KO}<span class="en">{BRAND_EN}</span></div>'
         f'<div class="hero-tag">{TAGLINE}</div>'
         '</div>'
         '<div class="home-h2">'

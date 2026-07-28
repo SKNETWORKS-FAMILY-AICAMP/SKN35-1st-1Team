@@ -6,40 +6,33 @@
 """
 
 from __future__ import annotations
-
 import streamlit as st
-
 from common.assets import FACE_URI
-from common.brand import BRAND_EN, BRAND_KO, NAV_ORDER, PAGES, TAGLINE
-
+from common.brand import BRAND_EN, BRAND_KO, NAV_ORDER, PAGES
 
 def render_sidebar() -> None:
     """브랜드 헤더 + 메뉴 버튼 + 안내 문구를 사이드바에 그린다."""
     with st.sidebar:
         st.markdown(
             f"""
-            <a class="brand" href="?nav=home" target="_self" title="홈으로">
+            <a class="brand" href="?nav=home" target="_self" title="홈으로" style="margin-bottom: 3rem;">
                 <img src="{FACE_URI}" alt="해치"/>
                 <div>
-                    <div class="brand-name">{BRAND_KO} <span>{BRAND_EN}</span></div>
-                    <div class="brand-sub">{TAGLINE}</div>
+                    <div class="brand-name">{BRAND_KO} <br/><span>{BRAND_EN}</span></div>
                 </div>
             </a>
-            <a class="home-link" href="?nav=home" target="_self">← 홈으로</a>
             """,
             unsafe_allow_html=True,
         )
-        st.markdown('<div class="nav-cap">메뉴</div>', unsafe_allow_html=True)
+        # st.markdown('<div class="nav-cap">메뉴</div>', unsafe_allow_html=True)
 
         for key in NAV_ORDER:
             page = PAGES[key]
             active = st.session_state.menu == key
-            if st.button(f"{page['icon']}  {page['label']}", key=f"nav_{key}",
+            # if st.button(f"{page['icon']}  {page['label']}", key=f"nav_{key}",
+            if st.button(f"{page['label']}", key=f"nav_{key}",
                          use_container_width=True,
                          type="primary" if active else "secondary"):
                 st.session_state.menu = key
                 st.rerun()
 
-        st.divider()
-        st.caption("📞 이용문의 1588-4388 · 24시간")
-        st.caption("⚠ 표시 데이터는 예시(Dummy)입니다.")
