@@ -16,7 +16,7 @@
 | 이형밍 | API 데이터 정제 / 데이터베이스 스키마 설계 |
 
 ## 시스템 구성도
-![시스템 구성도](./docs/system_architecture)
+![시스템 구성도](./docs/system_architecture.png)
 
 ## 화면 구성
 
@@ -43,15 +43,15 @@
 
 ```
 SKN35-1ST-1TEAM/
-│  .env
-│  .env.example
-│  .gitignore
-│  .python-version
-│  config.py                    
-│  main.py                      # 진입점, 페이지 라우팅
-│  pyproject.toml               # uv 설정 정보
-│  README.md
-│  uv.lock
+├─ .env
+├─ .env.example
+├─ .gitignore
+├─ .python-version
+├─ config.py                    
+├─ main.py                      # 진입점, 페이지 라우팅
+├─ pyproject.toml               # uv 설정 정보
+├─ README.md
+├─ uv.lock
 │  
 ├─.streamlit
 │      config.toml              # 테마 설정 (색상, 폰트)
@@ -131,6 +131,6 @@ SKN35-1ST-1TEAM/
 # 1. pyproject.toml 패키지 의존성 설치
 uv pip install -r pyproject.toml
 
-# 2. 실행
+# 2. streamlit 실행
 uv run streamlit run main.py
 ```
