@@ -54,6 +54,11 @@
     --shadow-tile-hover:0 16px 34px rgba(26, 54, 93, 0.16);
 }
 
+[class*="st-key-reservation_summary"] {
+    background-color: var(--badge-welfare-bg) !important;
+    border: 0 !important;
+}
+
 
 /* ---------- 전역 타이포 ---------- */
 h1, h2, h3 { color: var(--color-secondary-dark); }
