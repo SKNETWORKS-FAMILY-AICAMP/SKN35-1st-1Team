@@ -60,13 +60,13 @@
 
 | 분류 | 기술 |
 | --- | --- |
-| 언어 | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) |
-| Frontend / App | ![Streamlit](https://img.shields.io/badge/Streamlit-%23FE4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white) |
-| Database | ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![pymysql](https://img.shields.io/badge/PyMySQL-4479A1?logoColor=white) |
-| Data Crawling | ![Selenium](https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white) ![BeautifulSoup4](https://img.shields.io/badge/BeautifulSoup4-4B8BBE?logoColor=white) ![requests](https://img.shields.io/badge/Requests-2E7D32?logoColor=white) |
-| Data Handling | ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white) |
-| 환경/패키지 관리 | ![uv](https://img.shields.io/badge/uv-%23DE5FE9.svg?style=for-the-badge&logo=uv&logoColor=white) ![dotenv](https://img.shields.io/badge/python--dotenv-ECD53F?logoColor=black) |
-| 배포 | ![Streamlit](https://img.shields.io/badge/Streamlit-%23FE4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white) ![TiDB](https://img.shields.io/badge/TiDB-FF6600?style=flat) |
+| 언어 | ![Python](https://img.shields.io/badge/Python%203.12-3776AB?logo=python&logoColor=white) |
+| Frontend / App | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) |
+| Database | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white) ![pymysql](https://img.shields.io/badge/PyMySQL-4479A1?logoColor=white) |
+| Data Crawling | ![Selenium](https://img.shields.io/badge/Selenium-43B02A?logo=selenium&logoColor=white) ![BeautifulSoup4](https://img.shields.io/badge/BeautifulSoup4-4B8BBE?logoColor=white) ![requests](https://img.shields.io/badge/Requests-2E7D32?logoColor=white) |
+| Data Handling | ![Jupyter Notebook](https://img.shields.io/badge/Jupyter%20Notebook-F37626?logo=jupyter&logoColor=white) ![Pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white) |
+| 환경/패키지 관리 | ![uv](https://img.shields.io/badge/uv-DE5FE9?logoColor=white) ![dotenv](https://img.shields.io/badge/python--dotenv-ECD53F?logoColor=black) |
+| 배포 | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) ![TiDB](https://img.shields.io/badge/TiDB-FF6600?style=flat) |
 
 ## 폴더 구조
 
@@ -152,7 +152,7 @@ SKN35-1ST-1TEAM/
 | 관련뉴스 | 네이버뉴스 검색결과 | 웹크롤링 |
 
 ## ERD
--
+![ERD](./docs/erd.png)
 
 ## 실행 방법
 
@@ -164,3 +164,4 @@ uv pip install -r pyproject.toml
 uv run streamlit run main.py
 ```
 
+## 실행 화면 예시
