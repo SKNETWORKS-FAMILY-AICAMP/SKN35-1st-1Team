@@ -255,3 +255,27 @@ def get_weekday_hour_stats(weekday_no):
     finally:
         connection.close()
 # --------- 예약하기 --------- //
+
+# --------- 뉴스 ---------
+# 연도별 이용 건수
+def get_news_data():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT
+            category,
+            keyword,
+            headline,
+            body,
+            press,
+            url,
+            crawled_at
+        FROM disability_news.newsdesk
+        ORDER BY crawled_at DESC
+    """)
+
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    return result
