@@ -10,13 +10,32 @@
 | 이름 | 역할 |
 |---|---|
 | 최우석 | PM(팀장) / 코드 검토 및 취합 / 배포 테스트 |
-| 박수휘 | Git 형상관리 / Streamlit 시각화 구현 |
-| 심성욱 | 데이터 크롤링 / 수집 데이터 정제 / 발표 |
-| 이세희 | 데이터 크롤링 / Streamlit UI 설계 및 구현 |
-| 이형밍 | API 데이터 정제 / 데이터베이스 스키마 설계 |
+| 박수휘 | Git 형상관리 / Streamlit 시각화 구현 / 이용현황 화면 구현 |
+| 심성욱 | 데이터 크롤링 / 수집 데이터 정제 / 관련 뉴스 화면 구현 / 발표 |
+| 이세희 | 데이터 크롤링 / Streamlit UI 설계 및 구현 / FAQ 화면 구현 |
+| 이형민 | API 데이터 정제 / 데이터베이스 스키마 설계 / 예약하기 화면 구현 |
 
 ## 시스템 구성도
 ![시스템 구성도](./docs/system_architecture.png)
+
+📅 WBS & 개발 일정
+| 구분 | 작업 | 7/21 | 7/22 | 7/23 | 7/24 | 7/27 | 7/28 |
+|------|------|:----:|:----:|:----:|:----:|:---:|:---:|
+| 📋 기획 | 주제 선정 | 💛 | 💛 | 🤍 | 🤍 | 🤍 | 🤍 |
+| | 데이터 탐색 | 🤍 | 💛 | 💛 | 🤍 | 🤍 | 🤍 |
+| | 화면 기획 | 🤍 | 🤍 | 💛 | 💛 | 🤍 | 🤍 |
+| 📚 DB 설계 | DB 테이블 스키마 설계 | 🤍 | 🤍 | 💛 | 💛 | 💛 | 🤍 |
+| ⚙️ 데이터 수집 및 정제 | API 및 파일 데이터 확보 | 🤍 | 🤍 | 💛 | 💛 | 🤍 | 🤍 |
+| | 네이버 뉴스 데이터 수집 | 🤍 | 🤍 | 🤍 | 💛 | 💛 | 🤍 |
+| | 수집 데이터 전처리 | 🤍 | 🤍 | 🤍 | 💛 | 💛 | 🤍 |
+| | DB 적재 | 🤍 | 🤍 | 🤍 | 🤍 | 💛 | 🤍 |
+| 🖥️ 화면 구현 | 화면 UI 생성 | 🤍 | 🤍 | 🤍 | 💛 | 💛 | 🤍 |
+| | 이용 현황 화면 구현 | 🤍 | 🤍 | 🤍 | 💛 | 💛 | 💛 |
+| | 예약하기 화면 구현 | 🤍 | 🤍 | 🤍 | 💛 | 💛 | 💛 |
+| | FAQ 화면 구현 | 🤍 | 🤍 | 🤍 | 🤍 | 💛 | 💛 |
+| | 관련 뉴스 화면 구현 | 🤍 | 🤍 | 🤍 | 🤍 | 💛 | 💛 |
+| ✅ 배포 및 테스트 | streamlit 배포 및 테스트 | 🤍 | 🤍 | 🤍 | 🤍 | 💛 | 💛 |
+| | TiDB 데이터 적재 및 연동 테스트 | 🤍 | 🤍 | 🤍 | 🤍 | 💛 | 💛 |
 
 ## 화면 구성
 
@@ -26,18 +45,28 @@
 |---|---|
 | **이용현황** | 서울시 25개 자치구 지도 클릭 조회, 시간대별 예약 빈도 통계, 혼잡도 추이 |
 | **예약하기** | 예약 전 체크리스트 입력 → 요약 정보 생성 → 전화/문자/인터넷접수 안내, 실시간 혼잡 시간대 안내문구 |
-| **FAQ** | 서울시설공단 공식 안내(가입/이용기준/접수방법) 기반 Q&A |
-| **관련뉴스** | 네이버뉴스 "장애인콜택시" 검색결과 크롤링 |
+| **FAQ** | 서울시설공단 공식 안내(가입/이용기준/접수방법) 기반 FAQ |
+| **관련뉴스** | 네이버뉴스 "장애인 콜택시" 검색결과 크롤링 |
 
 ## 기술 스택
 
-| 구분 | 기술 |
+<!-- | 구분 | 기술 |
 |---|---|
 | 언어 | Python (uv 패키지 매니저) |
 | 데이터 수집 | BeautifulSoup |
 | 데이터베이스 | MySQL |
 | 프론트엔드 | Streamlit, streamlit-folium, Altair |
-| 배포 | Streamlit Community Cloud, TiDB |
+| 배포 | Streamlit Community Cloud, TiDB | -->
+
+| 분류 | 기술 |
+| --- | --- |
+| 언어 | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) |
+| Frontend / App | ![Streamlit](https://img.shields.io/badge/Streamlit-%23FE4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white) |
+| Database | ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![pymysql](https://img.shields.io/badge/PyMySQL-4479A1?logoColor=white) |
+| Data Crawling | ![Selenium](https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white) ![BeautifulSoup4](https://img.shields.io/badge/BeautifulSoup4-4B8BBE?logoColor=white) ![requests](https://img.shields.io/badge/Requests-2E7D32?logoColor=white) |
+| Data Handling | ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white) |
+| 환경/패키지 관리 | ![uv](https://img.shields.io/badge/uv-%23DE5FE9.svg?style=for-the-badge&logo=uv&logoColor=white) ![dotenv](https://img.shields.io/badge/python--dotenv-ECD53F?logoColor=black) |
+| 배포 | ![Streamlit](https://img.shields.io/badge/Streamlit-%23FE4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white) ![TiDB](https://img.shields.io/badge/TiDB-FF6600?style=flat) |
 
 ## 폴더 구조
 
@@ -134,3 +163,4 @@ uv pip install -r pyproject.toml
 # 2. streamlit 실행
 uv run streamlit run main.py
 ```
+
